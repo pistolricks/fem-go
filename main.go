@@ -4,6 +4,7 @@ import (
 	"flag"
 	"fmt"
 	"github.com/pistolricks/m-api/internal/app"
+	"github.com/pistolricks/m-api/internal/routes"
 	"net/http"
 	"time"
 )
@@ -18,9 +19,10 @@ func main() {
 		panic(err)
 	}
 
-	http.HandleFunc("/health", Healthcheck)
+	r := routes.SetupRoutes(app)
 	server := http.Server{
 		Addr:         fmt.Sprintf(":%d", port),
+		Handler:      r,
 		IdleTimeout:  time.Minute,
 		ReadTimeout:  10 * time.Second,
 		WriteTimeout: 30 * time.Second,
