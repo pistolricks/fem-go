@@ -21,6 +21,18 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
+  "lastFilter": {
+    "state": "OPEN",
+    "assignee": "pistolricks"
+  }
+}]]></component>
+  <component name="GithubPullRequestsUISettings"><![CDATA[{
+  "selectedUrlAndAccountId": {
+    "url": "git@github.com:pistolricks/fem-go.git",
+    "accountId": "b23fd8f0-7da6-4d49-a7c4-13cebf168904"
+  }
+}]]></component>
   <component name="KubernetesApiPersistence"><![CDATA[{}]]></component>
   <component name="KubernetesApiProvider"><![CDATA[{
   "isMigrated": true
@@ -74,7 +86,7 @@
     ]
   }
 }]]></component>
-  <component name="RunManager" selected="Docker.Docker Up">
+  <component name="RunManager" selected="Go Build.go build github.com/pistolricks/m-api">
     <configuration name="go build github.com/pistolricks/m-api" type="GoApplicationRunConfiguration" factoryName="Go Application" temporary="true" nameIsGenerated="true">
       <module name="m-api" />
       <working_directory value="$PROJECT_DIR$" />
