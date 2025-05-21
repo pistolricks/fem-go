@@ -21,6 +21,10 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+  <component name="KubernetesApiPersistence"><![CDATA[{}]]></component>
+  <component name="KubernetesApiProvider"><![CDATA[{
+  "isMigrated": true
+}]]></component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 4
 }</component>
@@ -38,6 +42,7 @@
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
     "DefaultGoTemplateProperty": "Go File",
+    "Docker.Docker Up.executor": "Run",
     "Go Build.go build github.com/pistolricks/fe-masters.executor": "Run",
     "Go Build.go build github.com/pistolricks/m-api.executor": "Run",
     "ModuleVcsDetector.initialDetectionPerformed": "true",
@@ -57,6 +62,13 @@
     "nodejs_package_manager_path": "npm",
     "onboarding.tips.debug.path": "/Users/eriksmith/GoLandProjects/fe-masters/main.go",
     "settings.editor.selected.configurable": "editing.templates"
+  },
+  "keyToStringList": {
+    "GitStage.ChangesTree.GroupingKeys": [
+      "directory",
+      "module",
+      "repository"
+    ]
   }
 }]]></component>
   <component name="RunManager" selected="Docker.Docker Up">
@@ -122,6 +134,10 @@
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Add Docker Compose setup for PostgreSQL and update configs&#10;&#10;Introduce a `docker-compose.yml` file to manage a PostgreSQL database container with persistent storage under `./database/postgres-data`. Update `.gitignore` to exclude the `database` folder and modify IDE configuration files to include Docker-related settings. The changes streamline development and allow containerized database usage." />
+    <option name="LAST_COMMIT_MESSAGE" value="Add Docker Compose setup for PostgreSQL and update configs&#10;&#10;Introduce a `docker-compose.yml` file to manage a PostgreSQL database container with persistent storage under `./database/postgres-data`. Update `.gitignore` to exclude the `database` folder and modify IDE configuration files to include Docker-related settings. The changes streamline development and allow containerized database usage." />
   </component>
   <component name="VgoProject">
     <settings-migrated>true</settings-migrated>
