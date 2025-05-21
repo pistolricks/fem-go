@@ -3,13 +3,14 @@ package app
 import (
 	"database/sql"
 	"fmt"
+	"log"
+	"net/http"
+	"os"
+
 	"github.com/pistolricks/m-api/internal/api"
 	"github.com/pistolricks/m-api/internal/middleware"
 	"github.com/pistolricks/m-api/internal/store"
 	"github.com/pistolricks/m-api/migrations"
-	"log"
-	"net/http"
-	"os"
 )
 
 type Application struct {
@@ -34,10 +35,12 @@ func NewApplication() (*Application, error) {
 
 	logger := log.New(os.Stdout, "", log.Ldate|log.Ltime)
 
+	// our stores will go here
 	workoutStore := store.NewPostgresWorkoutStore(pgDB)
 	userStore := store.NewPostgresUserStore(pgDB)
 	tokenStore := store.NewPostgresTokenStore(pgDB)
 
+	// our handlers will go here
 	workoutHandler := api.NewWorkoutHandler(workoutStore, logger)
 	userHandler := api.NewUserHandler(userStore, logger)
 	tokenHandler := api.NewTokenHandler(tokenStore, userStore, logger)
@@ -55,6 +58,6 @@ func NewApplication() (*Application, error) {
 	return app, nil
 }
 
-func (a *Application) Healthcheck(w http.ResponseWriter, r *http.Request) {
-	fmt.Fprintf(w, "Status is Available\n")
+func (a *Application) HealthCheck(w http.ResponseWriter, r *http.Request) {
+	fmt.Fprintf(w, "Status is available\n")
 }

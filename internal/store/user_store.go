@@ -4,29 +4,14 @@ import (
 	"crypto/sha256"
 	"database/sql"
 	"errors"
-	"golang.org/x/crypto/bcrypt"
 	"time"
+
+	"golang.org/x/crypto/bcrypt"
 )
 
-type User struct {
-	ID           int       `json:"id"`
-	Username     string    `json:"username"`
-	Email        string    `json:"email"`
-	PasswordHash password  `json:"-"`
-	Bio          string    `json:"bio"`
-	CreatedAt    time.Time `json:"created_at"`
-	UpdatedAt    time.Time `json:"updated_at"`
-}
-
-var AnonymousUser = &User{}
-
-func (u *User) IsAnonymous() bool {
-	return u == AnonymousUser
-}
-
 type password struct {
-	plainText *string
-	hash      []byte
+	plaintText *string
+	hash       []byte
 }
 
 func (p *password) Set(plaintextPassword string) error {
@@ -35,7 +20,7 @@ func (p *password) Set(plaintextPassword string) error {
 		return err
 	}
 
-	p.plainText = &plaintextPassword
+	p.plaintText = &plaintextPassword
 	p.hash = hash
 	return nil
 }
@@ -47,10 +32,27 @@ func (p *password) Matches(plaintextPassword string) (bool, error) {
 		case errors.Is(err, bcrypt.ErrMismatchedHashAndPassword):
 			return false, nil
 		default:
-			return false, err
+			return false, err //internal server error
 		}
 	}
+
 	return true, nil
+}
+
+type User struct { // LOGGED IN USER
+	ID           int       `json:"id"`
+	Username     string    `json:"username"`
+	Email        string    `json:"email"`
+	PasswordHash password  `json:"-"`
+	Bio          string    `json:"bio"`
+	CreatedAt    time.Time `json:"created_at"`
+	UpdatedAt    time.Time `json:"updated_at"`
+}
+
+var AnonymousUser = &User{} // EVERYONE WHOS NOT LOGGED IN
+
+func (u *User) IsAnonymous() bool {
+	return u == AnonymousUser
 }
 
 type PostgresUserStore struct {
@@ -71,19 +73,17 @@ type UserStore interface {
 }
 
 func (s *PostgresUserStore) CreateUser(user *User) error {
-	query := `INSERT INTO users (username, email, password_hash, bio) 
-				VALUES ($1, $2, $3, $4) 
-				RETURNING id, created_at, updated_at
-			`
-	err := s.db.QueryRow(query,
-		user.Username,
-		user.Email,
-		user.PasswordHash.hash,
-		user.Bio,
-	).Scan(&user.ID, &user.CreatedAt, &user.UpdatedAt)
+	query := `
+  INSERT INTO users (username, email, password_hash, bio)
+  VALUES ($1, $2, $3, $4)
+  RETURNING id, created_at, updated_at
+  `
+
+	err := s.db.QueryRow(query, user.Username, user.Email, user.PasswordHash.hash, user.Bio).Scan(&user.ID, &user.CreatedAt, &user.UpdatedAt)
 	if err != nil {
 		return err
 	}
+
 	return nil
 }
 
@@ -93,10 +93,11 @@ func (s *PostgresUserStore) GetUserByUsername(username string) (*User, error) {
 	}
 
 	query := `
-	SELECT id, username, email, password_hash, bio, created_at, updated_at
-	FROM users
-	WHERE username = $1
-	`
+  SELECT id, username, email, password_hash, bio, created_at, updated_at
+  FROM users
+  WHERE username = $1
+  `
+
 	err := s.db.QueryRow(query, username).Scan(
 		&user.ID,
 		&user.Username,
@@ -114,16 +115,18 @@ func (s *PostgresUserStore) GetUserByUsername(username string) (*User, error) {
 	if err != nil {
 		return nil, err
 	}
+
 	return user, nil
 }
 
 func (s *PostgresUserStore) UpdateUser(user *User) error {
 	query := `
-	UPDATE users
-	SET username = $1, email = $2, bio = $3, updated_at = CURRENT_TIMESTAMP
-	WHERE id = $4
-	RETURNING updated_at
-	`
+  UPDATE users
+  SET username = $1, email = $2, bio = $3, updated_at = CURRENT_TIMESTAMP
+  WHERE id = $4
+  RETURNING updated_at
+  `
+
 	result, err := s.db.Exec(query, user.Username, user.Email, user.Bio, user.ID)
 	if err != nil {
 		return err
@@ -133,22 +136,23 @@ func (s *PostgresUserStore) UpdateUser(user *User) error {
 	if err != nil {
 		return err
 	}
+
 	if rowsAffected == 0 {
 		return sql.ErrNoRows
 	}
-	return nil
 
+	return nil
 }
 
 func (s *PostgresUserStore) GetUserToken(scope, plaintextPassword string) (*User, error) {
 	tokenHash := sha256.Sum256([]byte(plaintextPassword))
 
 	query := `
-	SELECT u.id, u.username, u.email, u.password_hash, u.bio, u.created_at, u.updated_at
-	FROM users u
-	INNER JOIN tokens t ON t.user_id = u.id
-	WHERE t.hash = $1 AND t.scope = $2 AND t.expiry > $3
-	`
+  SELECT u.id, u.username, u.email, u.password_hash, u.bio, u.created_at, u.updated_at
+  FROM users u
+  INNER JOIN tokens t ON t.user_id = u.id
+  WHERE t.hash = $1 AND t.scope = $2 and t.expiry > $3
+  `
 
 	user := &User{
 		PasswordHash: password{},
@@ -163,11 +167,14 @@ func (s *PostgresUserStore) GetUserToken(scope, plaintextPassword string) (*User
 		&user.CreatedAt,
 		&user.UpdatedAt,
 	)
+
 	if err == sql.ErrNoRows {
 		return nil, nil
 	}
+
 	if err != nil {
 		return nil, err
 	}
+
 	return user, nil
 }

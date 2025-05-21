@@ -3,9 +3,10 @@ package utils
 import (
 	"encoding/json"
 	"errors"
-	"github.com/go-chi/chi/v5"
 	"net/http"
 	"strconv"
+
+	"github.com/go-chi/chi/v5"
 )
 
 type Envelope map[string]interface{}
@@ -26,12 +27,12 @@ func WriteJSON(w http.ResponseWriter, status int, data Envelope) error {
 func ReadIDParam(r *http.Request) (int64, error) {
 	idParam := chi.URLParam(r, "id")
 	if idParam == "" {
-		return 0, errors.New("Invalid id parameter")
+		return 0, errors.New("invalid id parameter")
 	}
-
 	id, err := strconv.ParseInt(idParam, 10, 64)
 	if err != nil {
-		return 0, errors.New("Invalid id parameter type")
+		return 0, errors.New("invalid id parameter type")
 	}
+
 	return id, nil
 }

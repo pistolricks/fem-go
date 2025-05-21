@@ -171,20 +171,10 @@
     <MESSAGE value="Update routes to enforce user authentication&#10;&#10;Wrapped workout handler routes with `RequireUser` middleware to ensure authentication is enforced for all user actions on workouts. This improves access control by validating user tokens before performing any operations." />
     <MESSAGE value="Enforce user authentication and update workouts schema&#10;&#10;Wrapped workout routes with `RequireUser` middleware to ensure only authenticated users can perform actions. Modified the workouts table schema to include a `user_id` column with a foreign key constraint for better data integrity and user association. These changes improve security and data consistency." />
     <MESSAGE value="Add user authentication and ownership checks to workouts&#10;&#10;Enforced user authentication in workout routes by integrating `RequireUser` middleware. Updated the workouts schema to include a `user_id` column with a foreign key constraint, ensuring data integrity and user association. Additionally, added checks to restrict workout modifications and deletions to the respective owners." />
-    <option name="LAST_COMMIT_MESSAGE" value="Add user authentication and ownership checks to workouts&#10;&#10;Enforced user authentication in workout routes by integrating `RequireUser` middleware. Updated the workouts schema to include a `user_id` column with a foreign key constraint, ensuring data integrity and user association. Additionally, added checks to restrict workout modifications and deletions to the respective owners." />
+    <MESSAGE value="Update authentication logic and add user ownership checks&#10;&#10;Integrated `RequireUser` middleware to enforce authentication on workout routes. Updated the workouts schema to include a `user_id` column with a foreign key constraint for improved data integrity. Added logic to restrict modifications and deletions to workout owners, enhancing security and access control." />
+    <option name="LAST_COMMIT_MESSAGE" value="Update authentication logic and add user ownership checks&#10;&#10;Integrated `RequireUser` middleware to enforce authentication on workout routes. Updated the workouts schema to include a `user_id` column with a foreign key constraint for improved data integrity. Added logic to restrict modifications and deletions to workout owners, enhancing security and access control." />
   </component>
   <component name="VgoProject">
     <settings-migrated>true</settings-migrated>
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="DlvLineBreakpoint">
-          <url>file://$PROJECT_DIR$/main.go</url>
-          <line>37</line>
-          <option name="timeStamp" value="2" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
   </component>
 </project>
