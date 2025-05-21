@@ -42,7 +42,9 @@ func (wh *WorkoutHandler) HandleGetWorkoutByID(w http.ResponseWriter, r *http.Re
 		return
 	}
 
-	utils.WriteJSON(w, http.StatusOK, utils.Envelope{"workout": workout})
+	var user = middleware.GetUser(r)
+
+	utils.WriteJSON(w, http.StatusOK, utils.Envelope{"workout": workout, "user": user})
 
 }
 
