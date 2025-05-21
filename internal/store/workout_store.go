@@ -59,8 +59,7 @@ func (pg *PostgresWorkoutStore) CreateWorkout(workout *Workout) (*Workout, error
 	}
 
 	// we also need to insert the entries
-	for i := range workout.Entries {
-		entry := &workout.Entries[i]
+	for _, entry := range workout.Entries {
 		query := `
     INSERT INTO workout_entries (workout_id, exercise_name, sets, reps, duration_seconds, weight, notes, order_index)
     VALUES ($1, $2, $3, $4, $5, $6, $7, $8)
@@ -83,11 +82,11 @@ func (pg *PostgresWorkoutStore) CreateWorkout(workout *Workout) (*Workout, error
 func (pg *PostgresWorkoutStore) GetWorkoutByID(id int64) (*Workout, error) {
 	workout := &Workout{}
 	query := `
-  SELECT id, title, description, duration_minutes, calories_burned
+  SELECT id, title, description, duration_minutes, calories_burned, user_id
   FROM workouts
   WHERE id = $1
   `
-	err := pg.db.QueryRow(query, id).Scan(&workout.ID, &workout.Title, &workout.Description, &workout.DurationMinutes, &workout.CaloriesBurned)
+	err := pg.db.QueryRow(query, id).Scan(&workout.ID, &workout.Title, &workout.Description, &workout.DurationMinutes, &workout.CaloriesBurned, &workout.UserID)
 	if err == sql.ErrNoRows {
 		return nil, nil
 	}
