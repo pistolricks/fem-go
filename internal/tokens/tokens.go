@@ -7,6 +7,10 @@ import (
 	"time"
 )
 
+const (
+	ScopeAuth = "authentication"
+)
+
 type Token struct {
 	Plaintext string    `json:"plaintext"`
 	Hash      []byte    `json:"-"`
