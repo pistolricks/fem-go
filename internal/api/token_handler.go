@@ -2,6 +2,7 @@ package api
 
 import (
 	"encoding/json"
+	"github.com/pistolricks/m-api/internal/middleware"
 	"log"
 	"net/http"
 	"time"
@@ -20,6 +21,10 @@ type TokenHandler struct {
 type createTokenRequest struct {
 	Username string `json:"username"`
 	Password string `json:"password"`
+}
+
+type deleteTokensRequest struct {
+	Username string `json:"username"`
 }
 
 func NewTokenHandler(tokenStore store.TokenStore, userStore store.UserStore, logger *log.Logger) *TokenHandler {
@@ -69,5 +74,22 @@ func (h *TokenHandler) HandleCreateToken(w http.ResponseWriter, r *http.Request)
 	}
 
 	utils.WriteJSON(w, http.StatusCreated, utils.Envelope{"auth_token": token, "user": user})
+
+}
+
+func (h *TokenHandler) HandleDeleteAllUserTokens(w http.ResponseWriter, r *http.Request) {
+
+	// lets get the user
+	var user = middleware.GetUser(r)
+
+	err := h.tokenStore.DeleteAllTokensForUser(user.ID, tokens.ScopeAuth)
+	if err != nil {
+		h.logger.Printf("ERORR: Creating Token %v", err)
+		utils.WriteJSON(w, http.StatusInternalServerError, utils.Envelope{"error": "internal server error"})
+		return
+
+	}
+
+	utils.WriteJSON(w, http.StatusUnauthorized, utils.Envelope{"user": store.AnonymousUser, "message": "Logged Out"})
 
 }
