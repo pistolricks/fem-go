@@ -74,7 +74,7 @@
     ]
   }
 }]]></component>
-  <component name="RunManager" selected="Go Build.go build github.com/pistolricks/m-api">
+  <component name="RunManager" selected="Docker.Docker Up">
     <configuration name="go build github.com/pistolricks/m-api" type="GoApplicationRunConfiguration" factoryName="Go Application" temporary="true" nameIsGenerated="true">
       <module name="m-api" />
       <working_directory value="$PROJECT_DIR$" />
@@ -147,7 +147,8 @@
     <MESSAGE value="Add JSON utility functions and ID param reader&#10;&#10;Introduce `WriteJSON` for handling JSON responses and `ReadIDParam` for extracting and validating ID parameters from HTTP requests. These utilities simplify common tasks in request handling, improving code reusability and clarity." />
     <MESSAGE value="Refactor workout handlers to use utility functions&#10;&#10;Replaced repetitive JSON response and ID parsing logic with `utils.WriteJSON` and `utils.ReadIDParam`. Added improved logging for error handling and updated handler constructors to include a logger for better debugging and maintainability." />
     <MESSAGE value="Refactor workout handlers to use utility functions&#10;&#10;Replaced redundant JSON response and ID parsing logic with `utils.WriteJSON` and `utils.ReadIDParam`. Enhanced error handling with improved logging and updated handler constructors to include a logger, improving debugging and maintainability." />
-    <option name="LAST_COMMIT_MESSAGE" value="Refactor workout handlers to use utility functions&#10;&#10;Replaced redundant JSON response and ID parsing logic with `utils.WriteJSON` and `utils.ReadIDParam`. Enhanced error handling with improved logging and updated handler constructors to include a logger, improving debugging and maintainability." />
+    <MESSAGE value="Update workspace.xml with revised commit message history&#10;&#10;Aligned commit message records in workspace.xml for consistency. Updated redundant entries to reflect the latest updates to error handling, logging, and utility usage. No functional changes to the application." />
+    <option name="LAST_COMMIT_MESSAGE" value="Update workspace.xml with revised commit message history&#10;&#10;Aligned commit message records in workspace.xml for consistency. Updated redundant entries to reflect the latest updates to error handling, logging, and utility usage. No functional changes to the application." />
   </component>
   <component name="VgoProject">
     <settings-migrated>true</settings-migrated>
