@@ -1,5 +1,5 @@
 1.5:
-curl -X POST http://localhost:8080/workouts \
+curl -X POST http://localhost:4000/api/v1/workouts \
      -H "Content-Type: application/json" \
      -d '{
            "title": "Morning Strength Training",
@@ -28,7 +28,7 @@ curl -X POST http://localhost:8080/workouts \
 
 
 1.6:
-curl -X PUT http://localhost:8080/workouts/1 \
+curl -X PUT http://localhost:4000/api/v1/workouts/1 \
      -H "Content-Type: application/json" \
      -d '{
            "title": "Updated Full Body Strength Training",
@@ -63,7 +63,7 @@ curl -X PUT http://localhost:8080/workouts/1 \
 
 
 1.8:
-curl -X POST http://localhost:8080/workouts \
+curl -X POST http://localhost:4000/api/v1/workouts \
      -H "Content-Type: application/json" \
      -d '{
            "title": "Leg Day Workout",
@@ -91,9 +91,9 @@ curl -X POST http://localhost:8080/workouts \
          }'
 
 
-curl -X GET http://localhost:8080/workouts/2
+curl -X GET http://localhost:4000/api/v1/workouts/2
 
-curl -X PUT http://localhost:8080/workouts/2 \
+curl -X PUT http://localhost:4000/api/v1/workouts/2 \
      -H "Content-Type: application/json" \
      -d '{
            "title": "Updated Leg Day Workout",
@@ -123,7 +123,7 @@ curl -X PUT http://localhost:8080/workouts/2 \
 
 
 3.1:
-curl -X POST http://localhost:8080/users \
+curl -X POST http://localhost:4000/api/v1/users \
      -H "Content-Type: application/json" \
      -d '{
            "username": "john_doe",
@@ -134,7 +134,7 @@ curl -X POST http://localhost:8080/users \
 
 
 3.2:
-curl -X POST http://localhost:8080/users \
+curl -X POST http://localhost:4000/api/v1/users \
      -H "Content-Type: application/json" \
      -d '{
            "username": "jack_doe",
@@ -144,7 +144,7 @@ curl -X POST http://localhost:8080/users \
          }'
 
 
-curl -X POST http://localhost:8080/tokens/authentication \
+curl -X POST http://localhost:4000/api/v1/tokens/authentication \
      -H "Content-Type: application/json" \
      -d '{
     "username": "jack_doe",
@@ -154,7 +154,7 @@ curl -X POST http://localhost:8080/tokens/authentication \
 
 
 3.5:
-curl -X POST "http://localhost:8080/users" \
+curl -X POST "http://localhost:4000/api/v1/users" \
      -H "Content-Type: application/json" \
      -d '{
           "username": "melkey",
@@ -163,14 +163,14 @@ curl -X POST "http://localhost:8080/users" \
           "bio": "Fitness enthusiast and software developer"
         }'
 
-curl -X POST "http://localhost:8080/tokens/authentication" \
+curl -X POST "http://localhost:4000/api/v1/tokens/authentication" \
      -H "Content-Type: application/json" \
      -d '{
           "username": "melkey",
           "password": "SecureP@ssword123"
         }'
 
-curl -X POST "http://localhost:8080/workouts" \
+curl -X POST "http://localhost:4000/api/v1/workouts" \
      -H "Authorization: Bearer ZWKSMEEYHTSAOWFGUMBF6R3W4Y7YO5RXR4X2OUKK6YH3MD7IE4ZA" \
      -H "Content-Type: application/json" \
      -d '{
@@ -191,7 +191,7 @@ curl -X POST "http://localhost:8080/workouts" \
         }'
 
 
-curl -X PUT "http://localhost:8080/workouts/6" \
+curl -X PUT "http://localhost:4000/api/v1/workouts/6" \
      -H "Authorization: Bearer M6BOKTWSQJL74GJJO5OIOMOG3V63MYRIKLUBZ6ILEUQUPCN7472Q" \
      -H "Content-Type: application/json" \
      -d '{

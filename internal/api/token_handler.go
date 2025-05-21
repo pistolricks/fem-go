@@ -90,6 +90,6 @@ func (h *TokenHandler) HandleDeleteAllUserTokens(w http.ResponseWriter, r *http.
 
 	}
 
-	utils.WriteJSON(w, http.StatusUnauthorized, utils.Envelope{"user": store.AnonymousUser, "message": "Logged Out"})
+	utils.WriteJSON(w, http.StatusOK, utils.Envelope{"user": store.AnonymousUser, "message": "Logged Out"})
 
 }
