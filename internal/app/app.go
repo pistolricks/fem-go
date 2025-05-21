@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"github.com/pistolricks/m-api/internal/api"
 	"github.com/pistolricks/m-api/internal/store"
+	"github.com/pistolricks/m-api/migrations"
 	"log"
 	"net/http"
 	"os"
@@ -21,6 +22,12 @@ func NewApplication() (*Application, error) {
 	if err != nil {
 		return nil, err
 	}
+
+	err = store.MigrateFS(pgDB, migrations.FS, ".")
+	if err != nil {
+		panic(err)
+	}
+
 	logger := log.New(os.Stdout, "", log.Ldate|log.Ltime)
 
 	workoutHandler := api.NewWorkoutHandler()
