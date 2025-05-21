@@ -11,6 +11,7 @@
 4||10|c|G
 4||10|C|G
 4||10|T|G</Grants>
+      <IntrospectionStateNumber>771</IntrospectionStateNumber>
       <ServerVersion>17.5</ServerVersion>
       <StartupTime>1747814667</StartupTime>
       <TimeZones>true ACDT
@@ -810,6 +811,7 @@ true posixrules
 13262||10|C|G
 13262||-9223372036854775808|U|G
 13262||10|U|G</Grants>
+      <IntrospectionStateNumber>771</IntrospectionStateNumber>
       <ObjectId>5</ObjectId>
       <OwnerName>postgres</OwnerName>
     </database>
@@ -4231,7 +4233,8 @@ true posixrules
     <schema id="264" parent="2" name="public">
       <Comment>standard public schema</Comment>
       <Current>1</Current>
-      <LastIntrospectionLocalTimestamp>2025-05-21.03:56:43</LastIntrospectionLocalTimestamp>
+      <IntrospectionStateNumber>771</IntrospectionStateNumber>
+      <LastIntrospectionLocalTimestamp>2025-05-21.08:08:10</LastIntrospectionLocalTimestamp>
       <ObjectId>2200</ObjectId>
       <StateNumber>532</StateNumber>
       <OwnerName>pg_database_owner</OwnerName>
@@ -4274,25 +4277,31 @@ true posixrules
       <AccessMethodId>2</AccessMethodId>
       <OwnerName>postgres</OwnerName>
     </table>
-    <table id="270" parent="264" name="users">
+    <table id="270" parent="264" name="tokens">
+      <ObjectId>16449</ObjectId>
+      <StateNumber>770</StateNumber>
+      <AccessMethodId>2</AccessMethodId>
+      <OwnerName>postgres</OwnerName>
+    </table>
+    <table id="271" parent="264" name="users">
       <ObjectId>16396</ObjectId>
       <StateNumber>760</StateNumber>
       <AccessMethodId>2</AccessMethodId>
       <OwnerName>postgres</OwnerName>
     </table>
-    <table id="271" parent="264" name="workout_entries">
+    <table id="272" parent="264" name="workout_entries">
       <ObjectId>16422</ObjectId>
       <StateNumber>754</StateNumber>
       <AccessMethodId>2</AccessMethodId>
       <OwnerName>postgres</OwnerName>
     </table>
-    <table id="272" parent="264" name="workouts">
+    <table id="273" parent="264" name="workouts">
       <ObjectId>16411</ObjectId>
       <StateNumber>754</StateNumber>
       <AccessMethodId>2</AccessMethodId>
       <OwnerName>postgres</OwnerName>
     </table>
-    <column id="273" parent="269" name="id">
+    <column id="274" parent="269" name="id">
       <IdentityKind>by-default</IdentityKind>
       <NotNull>1</NotNull>
       <Position>1</Position>
@@ -4301,21 +4310,21 @@ true posixrules
       <SequenceId>16388</SequenceId>
       <TypeId>23</TypeId>
     </column>
-    <column id="274" parent="269" name="version_id">
+    <column id="275" parent="269" name="version_id">
       <NotNull>1</NotNull>
       <Position>2</Position>
       <StateNumber>751</StateNumber>
       <StoredType>bigint|0s</StoredType>
       <TypeId>20</TypeId>
     </column>
-    <column id="275" parent="269" name="is_applied">
+    <column id="276" parent="269" name="is_applied">
       <NotNull>1</NotNull>
       <Position>3</Position>
       <StateNumber>751</StateNumber>
       <StoredType>boolean|0s</StoredType>
       <TypeId>16</TypeId>
     </column>
-    <column id="276" parent="269" name="tstamp">
+    <column id="277" parent="269" name="tstamp">
       <DefaultExpression>now()</DefaultExpression>
       <NotNull>1</NotNull>
       <Position>4</Position>
@@ -4323,7 +4332,7 @@ true posixrules
       <StoredType>timestamp|0s</StoredType>
       <TypeId>1114</TypeId>
     </column>
-    <index id="277" parent="269" name="goose_db_version_pkey">
+    <index id="278" parent="269" name="goose_db_version_pkey">
       <ColNames>id</ColNames>
       <NameSurrogate>1</NameSurrogate>
       <ObjectId>16393</ObjectId>
@@ -4332,14 +4341,67 @@ true posixrules
       <Unique>1</Unique>
       <AccessMethodId>403</AccessMethodId>
     </index>
-    <key id="278" parent="269" name="goose_db_version_pkey">
+    <key id="279" parent="269" name="goose_db_version_pkey">
       <NameSurrogate>1</NameSurrogate>
       <ObjectId>16394</ObjectId>
       <Primary>1</Primary>
       <StateNumber>751</StateNumber>
       <UnderlyingIndexId>16393</UnderlyingIndexId>
     </key>
-    <column id="279" parent="270" name="id">
+    <column id="280" parent="270" name="hash">
+      <NotNull>1</NotNull>
+      <Position>1</Position>
+      <StateNumber>770</StateNumber>
+      <StoredType>bytea|0s</StoredType>
+      <TypeId>17</TypeId>
+    </column>
+    <column id="281" parent="270" name="user_id">
+      <NotNull>1</NotNull>
+      <Position>2</Position>
+      <StateNumber>770</StateNumber>
+      <StoredType>bigint|0s</StoredType>
+      <TypeId>20</TypeId>
+    </column>
+    <column id="282" parent="270" name="expiry">
+      <NotNull>1</NotNull>
+      <Position>3</Position>
+      <StateNumber>770</StateNumber>
+      <StoredType>timestamp(0) with time zone|0s</StoredType>
+      <TypeId>1184</TypeId>
+    </column>
+    <column id="283" parent="270" name="scope">
+      <NotNull>1</NotNull>
+      <Position>4</Position>
+      <StateNumber>770</StateNumber>
+      <StoredType>text|0s</StoredType>
+      <TypeId>25</TypeId>
+    </column>
+    <foreign-key id="284" parent="270" name="tokens_user_id_fkey">
+      <ColNames>user_id</ColNames>
+      <NameSurrogate>1</NameSurrogate>
+      <ObjectId>16456</ObjectId>
+      <OnDelete>cascade</OnDelete>
+      <StateNumber>770</StateNumber>
+      <RefKeyColPositions>1</RefKeyColPositions>
+      <RefTableId>16396</RefTableId>
+    </foreign-key>
+    <index id="285" parent="270" name="tokens_pkey">
+      <ColNames>hash</ColNames>
+      <NameSurrogate>1</NameSurrogate>
+      <ObjectId>16454</ObjectId>
+      <Primary>1</Primary>
+      <StateNumber>770</StateNumber>
+      <Unique>1</Unique>
+      <AccessMethodId>403</AccessMethodId>
+    </index>
+    <key id="286" parent="270" name="tokens_pkey">
+      <NameSurrogate>1</NameSurrogate>
+      <ObjectId>16455</ObjectId>
+      <Primary>1</Primary>
+      <StateNumber>770</StateNumber>
+      <UnderlyingIndexId>16454</UnderlyingIndexId>
+    </key>
+    <column id="287" parent="271" name="id">
       <DefaultExpression>nextval(&apos;users_id_seq&apos;::regclass)</DefaultExpression>
       <NotNull>1</NotNull>
       <Position>1</Position>
@@ -4348,48 +4410,48 @@ true posixrules
       <SequenceId>16395</SequenceId>
       <TypeId>20</TypeId>
     </column>
-    <column id="280" parent="270" name="username">
+    <column id="288" parent="271" name="username">
       <NotNull>1</NotNull>
       <Position>2</Position>
       <StateNumber>752</StateNumber>
       <StoredType>varchar(50)|0s</StoredType>
       <TypeId>1043</TypeId>
     </column>
-    <column id="281" parent="270" name="email">
+    <column id="289" parent="271" name="email">
       <NotNull>1</NotNull>
       <Position>3</Position>
       <StateNumber>752</StateNumber>
       <StoredType>varchar(255)|0s</StoredType>
       <TypeId>1043</TypeId>
     </column>
-    <column id="282" parent="270" name="password_hash">
+    <column id="290" parent="271" name="password_hash">
       <NotNull>1</NotNull>
       <Position>4</Position>
       <StateNumber>752</StateNumber>
       <StoredType>varchar(255)|0s</StoredType>
       <TypeId>1043</TypeId>
     </column>
-    <column id="283" parent="270" name="bio">
+    <column id="291" parent="271" name="bio">
       <Position>5</Position>
       <StateNumber>752</StateNumber>
       <StoredType>text|0s</StoredType>
       <TypeId>25</TypeId>
     </column>
-    <column id="284" parent="270" name="created_at">
+    <column id="292" parent="271" name="created_at">
       <DefaultExpression>CURRENT_TIMESTAMP</DefaultExpression>
       <Position>6</Position>
       <StateNumber>752</StateNumber>
       <StoredType>timestamp with time zone|0s</StoredType>
       <TypeId>1184</TypeId>
     </column>
-    <column id="285" parent="270" name="updated_at">
+    <column id="293" parent="271" name="updated_at">
       <DefaultExpression>CURRENT_TIMESTAMP</DefaultExpression>
       <Position>7</Position>
       <StateNumber>752</StateNumber>
       <StoredType>timestamp with time zone|0s</StoredType>
       <TypeId>1184</TypeId>
     </column>
-    <index id="286" parent="270" name="users_pkey">
+    <index id="294" parent="271" name="users_pkey">
       <ColNames>id</ColNames>
       <NameSurrogate>1</NameSurrogate>
       <ObjectId>16404</ObjectId>
@@ -4398,7 +4460,7 @@ true posixrules
       <Unique>1</Unique>
       <AccessMethodId>403</AccessMethodId>
     </index>
-    <index id="287" parent="270" name="users_username_key">
+    <index id="295" parent="271" name="users_username_key">
       <ColNames>username</ColNames>
       <NameSurrogate>1</NameSurrogate>
       <ObjectId>16406</ObjectId>
@@ -4409,7 +4471,7 @@ true posixrules
       <CollationIds>100</CollationIds>
       <CollationParentNames>pg_catalog</CollationParentNames>
     </index>
-    <index id="288" parent="270" name="users_email_key">
+    <index id="296" parent="271" name="users_email_key">
       <ColNames>email</ColNames>
       <NameSurrogate>1</NameSurrogate>
       <ObjectId>16408</ObjectId>
@@ -4420,33 +4482,33 @@ true posixrules
       <CollationIds>100</CollationIds>
       <CollationParentNames>pg_catalog</CollationParentNames>
     </index>
-    <key id="289" parent="270" name="users_pkey">
+    <key id="297" parent="271" name="users_pkey">
       <NameSurrogate>1</NameSurrogate>
       <ObjectId>16405</ObjectId>
       <Primary>1</Primary>
       <StateNumber>752</StateNumber>
       <UnderlyingIndexId>16404</UnderlyingIndexId>
     </key>
-    <key id="290" parent="270" name="users_username_key">
+    <key id="298" parent="271" name="users_username_key">
       <NameSurrogate>1</NameSurrogate>
       <ObjectId>16407</ObjectId>
       <StateNumber>752</StateNumber>
       <UnderlyingIndexId>16406</UnderlyingIndexId>
     </key>
-    <key id="291" parent="270" name="users_email_key">
+    <key id="299" parent="271" name="users_email_key">
       <NameSurrogate>1</NameSurrogate>
       <ObjectId>16409</ObjectId>
       <StateNumber>752</StateNumber>
       <UnderlyingIndexId>16408</UnderlyingIndexId>
     </key>
-    <check id="292" parent="271" name="valid_workout_entry">
+    <check id="300" parent="272" name="valid_workout_entry">
       <ColNames>reps
 duration_seconds</ColNames>
       <ObjectId>16427</ObjectId>
       <Predicate>((reps IS NOT NULL) OR (duration_seconds IS NOT NULL)) AND ((reps IS NULL) OR (duration_seconds IS NULL))</Predicate>
       <StateNumber>754</StateNumber>
     </check>
-    <column id="293" parent="271" name="id">
+    <column id="301" parent="272" name="id">
       <DefaultExpression>nextval(&apos;workout_entries_id_seq&apos;::regclass)</DefaultExpression>
       <NotNull>1</NotNull>
       <Position>1</Position>
@@ -4455,72 +4517,72 @@ duration_seconds</ColNames>
       <SequenceId>16421</SequenceId>
       <TypeId>20</TypeId>
     </column>
-    <column id="294" parent="271" name="workout_id">
+    <column id="302" parent="272" name="workout_id">
       <NotNull>1</NotNull>
       <Position>2</Position>
       <StateNumber>754</StateNumber>
       <StoredType>bigint|0s</StoredType>
       <TypeId>20</TypeId>
     </column>
-    <column id="295" parent="271" name="exercise_name">
+    <column id="303" parent="272" name="exercise_name">
       <NotNull>1</NotNull>
       <Position>3</Position>
       <StateNumber>754</StateNumber>
       <StoredType>varchar(255)|0s</StoredType>
       <TypeId>1043</TypeId>
     </column>
-    <column id="296" parent="271" name="sets">
+    <column id="304" parent="272" name="sets">
       <NotNull>1</NotNull>
       <Position>4</Position>
       <StateNumber>754</StateNumber>
       <StoredType>integer|0s</StoredType>
       <TypeId>23</TypeId>
     </column>
-    <column id="297" parent="271" name="reps">
+    <column id="305" parent="272" name="reps">
       <Position>5</Position>
       <StateNumber>754</StateNumber>
       <StoredType>integer|0s</StoredType>
       <TypeId>23</TypeId>
     </column>
-    <column id="298" parent="271" name="duration_seconds">
+    <column id="306" parent="272" name="duration_seconds">
       <Position>6</Position>
       <StateNumber>754</StateNumber>
       <StoredType>integer|0s</StoredType>
       <TypeId>23</TypeId>
     </column>
-    <column id="299" parent="271" name="weight">
+    <column id="307" parent="272" name="weight">
       <Position>7</Position>
       <StateNumber>754</StateNumber>
       <StoredType>numeric(5,2 digit)|0s</StoredType>
       <TypeId>1700</TypeId>
     </column>
-    <column id="300" parent="271" name="notes">
+    <column id="308" parent="272" name="notes">
       <Position>8</Position>
       <StateNumber>754</StateNumber>
       <StoredType>text|0s</StoredType>
       <TypeId>25</TypeId>
     </column>
-    <column id="301" parent="271" name="order_index">
+    <column id="309" parent="272" name="order_index">
       <NotNull>1</NotNull>
       <Position>9</Position>
       <StateNumber>754</StateNumber>
       <StoredType>integer|0s</StoredType>
       <TypeId>23</TypeId>
     </column>
-    <column id="302" parent="271" name="description">
+    <column id="310" parent="272" name="description">
       <Position>10</Position>
       <StateNumber>754</StateNumber>
       <StoredType>text|0s</StoredType>
       <TypeId>25</TypeId>
     </column>
-    <column id="303" parent="271" name="created_at">
+    <column id="311" parent="272" name="created_at">
       <DefaultExpression>CURRENT_TIMESTAMP</DefaultExpression>
       <Position>11</Position>
       <StateNumber>754</StateNumber>
       <StoredType>timestamp with time zone|0s</StoredType>
       <TypeId>1184</TypeId>
     </column>
-    <foreign-key id="304" parent="271" name="workout_entries_workout_id_fkey">
+    <foreign-key id="312" parent="272" name="workout_entries_workout_id_fkey">
       <ColNames>workout_id</ColNames>
       <NameSurrogate>1</NameSurrogate>
       <ObjectId>16432</ObjectId>
@@ -4529,7 +4591,7 @@ duration_seconds</ColNames>
       <RefKeyColPositions>1</RefKeyColPositions>
       <RefTableId>16411</RefTableId>
     </foreign-key>
-    <index id="305" parent="271" name="workout_entries_pkey">
+    <index id="313" parent="272" name="workout_entries_pkey">
       <ColNames>id</ColNames>
       <NameSurrogate>1</NameSurrogate>
       <ObjectId>16430</ObjectId>
@@ -4538,14 +4600,14 @@ duration_seconds</ColNames>
       <Unique>1</Unique>
       <AccessMethodId>403</AccessMethodId>
     </index>
-    <key id="306" parent="271" name="workout_entries_pkey">
+    <key id="314" parent="272" name="workout_entries_pkey">
       <NameSurrogate>1</NameSurrogate>
       <ObjectId>16431</ObjectId>
       <Primary>1</Primary>
       <StateNumber>754</StateNumber>
       <UnderlyingIndexId>16430</UnderlyingIndexId>
     </key>
-    <column id="307" parent="272" name="id">
+    <column id="315" parent="273" name="id">
       <DefaultExpression>nextval(&apos;workouts_id_seq&apos;::regclass)</DefaultExpression>
       <NotNull>1</NotNull>
       <Position>1</Position>
@@ -4554,47 +4616,47 @@ duration_seconds</ColNames>
       <SequenceId>16410</SequenceId>
       <TypeId>20</TypeId>
     </column>
-    <column id="308" parent="272" name="title">
+    <column id="316" parent="273" name="title">
       <NotNull>1</NotNull>
       <Position>2</Position>
       <StateNumber>753</StateNumber>
       <StoredType>varchar(255)|0s</StoredType>
       <TypeId>1043</TypeId>
     </column>
-    <column id="309" parent="272" name="description">
+    <column id="317" parent="273" name="description">
       <Position>3</Position>
       <StateNumber>753</StateNumber>
       <StoredType>text|0s</StoredType>
       <TypeId>25</TypeId>
     </column>
-    <column id="310" parent="272" name="duration_minutes">
+    <column id="318" parent="273" name="duration_minutes">
       <NotNull>1</NotNull>
       <Position>4</Position>
       <StateNumber>753</StateNumber>
       <StoredType>integer|0s</StoredType>
       <TypeId>23</TypeId>
     </column>
-    <column id="311" parent="272" name="calories_burned">
+    <column id="319" parent="273" name="calories_burned">
       <Position>5</Position>
       <StateNumber>753</StateNumber>
       <StoredType>integer|0s</StoredType>
       <TypeId>23</TypeId>
     </column>
-    <column id="312" parent="272" name="created_at">
+    <column id="320" parent="273" name="created_at">
       <DefaultExpression>CURRENT_TIMESTAMP</DefaultExpression>
       <Position>6</Position>
       <StateNumber>753</StateNumber>
       <StoredType>timestamp with time zone|0s</StoredType>
       <TypeId>1184</TypeId>
     </column>
-    <column id="313" parent="272" name="updated_at">
+    <column id="321" parent="273" name="updated_at">
       <DefaultExpression>CURRENT_TIMESTAMP</DefaultExpression>
       <Position>7</Position>
       <StateNumber>753</StateNumber>
       <StoredType>timestamp with time zone|0s</StoredType>
       <TypeId>1184</TypeId>
     </column>
-    <index id="314" parent="272" name="workouts_pkey">
+    <index id="322" parent="273" name="workouts_pkey">
       <ColNames>id</ColNames>
       <NameSurrogate>1</NameSurrogate>
       <ObjectId>16419</ObjectId>
@@ -4603,7 +4665,7 @@ duration_seconds</ColNames>
       <Unique>1</Unique>
       <AccessMethodId>403</AccessMethodId>
     </index>
-    <key id="315" parent="272" name="workouts_pkey">
+    <key id="323" parent="273" name="workouts_pkey">
       <NameSurrogate>1</NameSurrogate>
       <ObjectId>16420</ObjectId>
       <Primary>1</Primary>
