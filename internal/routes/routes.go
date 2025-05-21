@@ -4,11 +4,45 @@ import (
 	"github.com/go-chi/chi/v5"
 	"github.com/go-chi/chi/v5/middleware"
 	"github.com/go-chi/cors"
+	"github.com/gorilla/websocket"
 	"github.com/pistolricks/m-api/internal/app"
+	"log"
+	"net/http"
 )
+
+var upgrader = websocket.Upgrader{
+	ReadBufferSize:  1024,
+	WriteBufferSize: 1024,
+	CheckOrigin: func(r *http.Request) bool {
+		return true // Allow connections from any origin
+	},
+}
+
+func handleConnections(w http.ResponseWriter, r *http.Request) {
+	ws, err := upgrader.Upgrade(w, r, nil)
+	if err != nil {
+		log.Fatal(err)
+	}
+	defer ws.Close()
+
+	for {
+		messageType, p, err := ws.ReadMessage()
+		if err != nil {
+			log.Println(err)
+			return
+		}
+		log.Printf("Received message: %s\n", p)
+
+		if err := ws.WriteMessage(messageType, p); err != nil {
+			log.Println(err)
+			return
+		}
+	}
+}
 
 func SetupRoutes(app *app.Application) *chi.Mux {
 	r := chi.NewRouter()
+
 	r.Use(middleware.RouteHeaders().
 		Route("Origin", "*", cors.Handler(cors.Options{
 			// AllowedOrigins:   []string{"https://foo.com"}, // Use this to allow specific origin hosts
@@ -31,12 +65,13 @@ func SetupRoutes(app *app.Application) *chi.Mux {
 			r.Delete("/workouts/{id}", app.Middleware.RequireUser(app.WorkoutHandler.HandleDeleteWorkoutByID))
 
 			r.Delete("/logout", app.Middleware.RequireUser(app.TokenHandler.HandleDeleteAllUserTokens))
+
 		})
 
 		r.Get("/health", app.HealthCheck)
 		r.Post("/users", app.UserHandler.HandleRegisterUser)
 		r.Post("/tokens/authentication", app.TokenHandler.HandleCreateToken)
-
+		r.Get("/ws", handleConnections)
 	})
 
 	return r
