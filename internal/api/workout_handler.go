@@ -42,7 +42,7 @@ func (wh *WorkoutHandler) HandleGetWorkoutByID(w http.ResponseWriter, r *http.Re
 		return
 	}
 
-	var user = middleware.GetUser(r)
+	user := middleware.GetUser(r)
 
 	utils.WriteJSON(w, http.StatusOK, utils.Envelope{"workout": workout, "user": user})
 
@@ -156,7 +156,7 @@ func (wh *WorkoutHandler) HandleUpdateWorkoutByID(w http.ResponseWriter, r *http
 		return
 	}
 
-	utils.WriteJSON(w, http.StatusOK, utils.Envelope{"workout": existingWorkout})
+	utils.WriteJSON(w, http.StatusOK, utils.Envelope{"workout": existingWorkout, "user": currentUser})
 
 }
 

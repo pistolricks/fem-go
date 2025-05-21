@@ -80,7 +80,7 @@ func (h *TokenHandler) HandleCreateToken(w http.ResponseWriter, r *http.Request)
 func (h *TokenHandler) HandleDeleteAllUserTokens(w http.ResponseWriter, r *http.Request) {
 
 	// lets get the user
-	var user = middleware.GetUser(r)
+	user := middleware.GetUser(r)
 
 	err := h.tokenStore.DeleteAllTokensForUser(user.ID, tokens.ScopeAuth)
 	if err != nil {
